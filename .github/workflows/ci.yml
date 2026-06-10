@@ -19,7 +19,9 @@ jobs:
           version: 0.16.0
 
       - name: Build
-        run: zig build
+        # The tmp dir must exist before zig can extract zip dependencies
+        # (the sqlite amalgamation) into the cache.
+        run: mkdir -p .zig-cache/tmp && zig build
 
       - name: Format check
         run: zig fmt --check build.zig src

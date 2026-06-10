@@ -1,0 +1,23 @@
+.{
+    .name = .sqlite_mcp,
+    .version = "0.1.0",
+    .fingerprint = 0x8c93848c056605b8,
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{
+        .zig_mcp_sdk = .{
+            .url = "git+https://github.com/PaytonWebber/zig-mcp-sdk?ref=v0.4.0#9a03256291674fdc2a2f27c2116bc469568a90e7",
+            .hash = "zig_mcp_sdk-0.4.0-FT3Vjax4AwAzMde5Pgh-pJHUvZHytPAZ2H2xPkjy9ZHy",
+        },
+        .sqlite = .{
+            .url = "https://www.sqlite.org/2026/sqlite-amalgamation-3530200.zip",
+            .hash = "N-V-__8AALc_rgC04POe18O0LKFRm4ouQpLtL3riscEmWp-Q",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "LICENSE",
+        "README.md",
+        "src",
+    },
+}

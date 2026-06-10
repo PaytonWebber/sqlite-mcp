@@ -8,7 +8,7 @@ Point Claude at any SQLite database with a single 1 MB binary.
 claude mcp add my-db /path/to/sqlite-mcp /path/to/database.db
 ```
 
-No Python, no Node, no runtime. One statically linked executable with SQLite compiled in: about 1 MB stripped, starts and answers a query in under 10 ms, 3.7 MB resident.
+No Python, no Node, no runtime. One statically linked executable with SQLite compiled in: about 1 MB stripped. A full cold-process session (initialize, handshake, one SELECT) completes in about 2 ms with 2.9 MB peak memory; the reference Python server takes about 410 ms and 64 MB for the same session, the most-used npm server about 210 ms and 84 MB.
 
 The database is opened **read-only**. Writes fail at the SQLite layer, so it is safe to hand an LLM.
 

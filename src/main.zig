@@ -165,7 +165,8 @@ const Handler = struct {
 pub fn main(init: std.process.Init) !void {
     const allocator = init.arena.allocator();
 
-    var args_it = std.process.Args.Iterator.init(init.minimal.args);
+    var args_it = try std.process.Args.Iterator.initAllocator(init.minimal.args, init.gpa);
+    defer args_it.deinit();
     _ = args_it.next(); // program name
     const db_path = args_it.next() orelse {
         std.debug.print("usage: sqlite-mcp <database-file>\n", .{});

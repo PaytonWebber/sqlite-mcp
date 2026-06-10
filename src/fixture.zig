@@ -4,8 +4,9 @@ const std = @import("std");
 const sqlite = @import("sqlite.zig");
 
 pub fn main(init: std.process.Init) !void {
-    var args_it = std.process.Args.Iterator.init(init.minimal.args);
-    _ = args_it.next();
+    var args_it = try std.process.Args.Iterator.initAllocator(init.minimal.args, init.gpa);
+    defer args_it.deinit();
+    _ = args_it.next(); // program name
     const path = args_it.next() orelse {
         std.debug.print("usage: make-fixture <database-file>\n", .{});
         return error.MissingDatabasePath;

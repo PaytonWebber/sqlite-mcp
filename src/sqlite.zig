@@ -17,7 +17,10 @@ pub const OPEN_CREATE: c_int = 0x4;
 
 const COLUMN_NULL: c_int = 5;
 
-const Destructor = ?*const fn (?*anyopaque) callconv(.c) void;
+/// ABI-compatible with sqlite's destructor function pointer; declared as an
+/// unaligned opaque pointer so SQLITE_TRANSIENT ((void(*)(void*))-1) is
+/// representable on targets with function pointer alignment.
+const Destructor = ?*align(1) const anyopaque;
 /// SQLITE_TRANSIENT: sqlite copies the buffer before returning.
 const TRANSIENT: Destructor = @ptrFromInt(std.math.maxInt(usize));
 
